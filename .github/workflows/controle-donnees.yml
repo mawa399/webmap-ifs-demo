@@ -1,0 +1,32 @@
+name: Contrôle des données
+
+# Se déclenche à chaque mise à jour des fichiers de données (dépôt via l'interface web de GitHub
+# ou toute autre méthode). Le rapport s'affiche dans l'onglet « Actions » du dépôt.
+on:
+  push:
+    paths:
+      - "data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  controle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Contrôler data/projets.csv
+        run: python scripts/valider_donnees.py --rapport rapport_validation.md
+      - name: Afficher le rapport
+        if: always()
+        run: cat rapport_validation.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Conserver le rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-validation
+          path: rapport_validation.md
