@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intégrer la webmap de l’IFS dans un site</title>
+<meta name="description" content="Comment intégrer la webmap de l’Initiative Fleuve Sénégal dans Sahelink ou le site d’un membre, avec un simple code iframe.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Public+Sans:wght@400;600&display=swap">
+<style>
+:root{--ground:#EEF2F0;--surface:#fff;--ink:#15302B;--ink-2:#4B615C;--line:#D5DEDB;--accent:#15637A;--code:#F5F8F7}
+@media (prefers-color-scheme:dark){:root{--ground:#0E1719;--surface:#152226;--ink:#E3ECE9;--ink-2:#A9BBB7;--line:#2A3C40;--accent:#5DB6C7;--code:#1A2A2F;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.55 "Public Sans",system-ui,sans-serif;padding:24px 16px 48px}
+main{max-width:1060px;margin:0 auto}
+h1{font-family:"Bricolage Grotesque","Public Sans",sans-serif;font-size:28px;margin:0 0 6px;text-wrap:balance}
+h2{font-family:"Bricolage Grotesque","Public Sans",sans-serif;font-size:19px;margin:28px 0 8px}
+p{color:var(--ink-2);max-width:68ch}
+a{color:var(--accent)}
+.code{position:relative;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.5 ui-monospace,Consolas,monospace;white-space:pre}
+.copy{position:absolute;top:8px;right:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:5px 10px;font:600 12.5px "Public Sans",sans-serif;cursor:pointer}
+.host{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:12px}
+.host header{display:flex;gap:18px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+.host header b{font-family:"Bricolage Grotesque",sans-serif;color:var(--ink);font-size:16px;margin-right:auto}
+.host .content{padding:16px 18px}
+iframe{width:100%;height:640px;border:1px solid var(--line);border-radius:10px;display:block}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+.wrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<main>
+  <p><a href="./">← Retour à la carte</a></p>
+  <h1>Intégrer la webmap dans un autre site</h1>
+  <p>La webmap existe en deux versions qui pointent vers la même application : la <strong>page autonome</strong>, indexée par les moteurs de recherche, et un <strong>mode intégré</strong> allégé, pensé pour être inséré dans Sahelink et dans les sites des membres de l’IFS. Une mise à jour des données se répercute partout en même temps.</p>
+
+  <h2>1. Copier le code d’intégration</h2>
+  <div class="code" id="snippet">&lt;iframe
+  src="https://mawa399.github.io/webmap-ifs-demo/?embed=1"
+  title="Carte des actions de l’Initiative Fleuve Sénégal"
+  width="100%" height="640" style="border:0" loading="lazy"
+  allow="clipboard-write"&gt;&lt;/iframe&gt;<button class="copy" type="button" id="cp">Copier</button></div>
+
+  <h2>2. Options</h2>
+  <div class="wrap"><table>
+    <tr><th>Adresse</th><th>Effet</th></tr>
+    <tr><td><code>?embed=1</code></td><td>Mode intégré : bandeau compact, filtres repliés dans un bouton, lien « Ouvrir la carte complète ».</td></tr>
+    <tr><td><code>?embed=1#pays=Mauritanie</code></td><td>Ouvre la carte déjà filtrée sur un pays (utile pour le site d’un membre actif dans un seul pays).</td></tr>
+    <tr><td><code>?embed=1#org=grdr</code></td><td>N’affiche que les projets d’un membre et ceux qu’il co-porte.</td></tr>
+    <tr><td><code>?embed=1#theme=eau_assainissement</code></td><td>Filtre sur une thématique.</td></tr>
+  </table></div>
+  <p>Tous les filtres de la carte peuvent être combinés de cette façon : le bouton « Copier le lien de cette vue » de la page autonome génère l’adresse correspondante.</p>
+
+  <h2>3. Aperçu dans un site hôte (exemple fictif)</h2>
+  <div class="host">
+    <header><b>Site hôte – exemple</b><span>Accueil</span><span>Ressources</span><span>Nos actions</span></header>
+    <div class="content">
+      <p style="margin-top:0">Exemple d’article présentant la carte des actions menées dans le bassin du fleuve Sénégal, intégrée ci-dessous.</p>
+      <iframe src="./?embed=1#pays=S%C3%A9n%C3%A9gal" title="Carte des actions de l’Initiative Fleuve Sénégal" loading="lazy"></iframe>
+    </div>
+  </div>
+</main>
+<script>
+document.getElementById('cp').onclick = function () {
+  var t = document.getElementById('snippet').firstChild.textContent;
+  navigator.clipboard.writeText(t).then(() => { this.textContent = 'Copié'; setTimeout(() => this.textContent = 'Copier', 1800); });
+};
+</script>
+</body>
+</html>

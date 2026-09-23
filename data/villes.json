@@ -1,0 +1,84 @@
+{
+ "villes": [
+  {
+   "nom": "Saint-Louis",
+   "lat": 16.03,
+   "lon": -16.49
+  },
+  {
+   "nom": "Podor",
+   "lat": 16.65,
+   "lon": -14.96
+  },
+  {
+   "nom": "Matam",
+   "lat": 15.66,
+   "lon": -13.26
+  },
+  {
+   "nom": "Bakel",
+   "lat": 14.9,
+   "lon": -12.46
+  },
+  {
+   "nom": "Kayes",
+   "lat": 14.45,
+   "lon": -11.44
+  },
+  {
+   "nom": "Kaédi",
+   "lat": 16.15,
+   "lon": -13.5
+  },
+  {
+   "nom": "Rosso",
+   "lat": 16.51,
+   "lon": -15.81
+  },
+  {
+   "nom": "Sélibaby",
+   "lat": 15.16,
+   "lon": -12.18
+  },
+  {
+   "nom": "Kiffa",
+   "lat": 16.62,
+   "lon": -11.4
+  },
+  {
+   "nom": "Tambacounda",
+   "lat": 13.77,
+   "lon": -13.67
+  },
+  {
+   "nom": "Kédougou",
+   "lat": 12.56,
+   "lon": -12.18
+  },
+  {
+   "nom": "Labé",
+   "lat": 11.32,
+   "lon": -12.28
+  },
+  {
+   "nom": "Bafoulabé",
+   "lat": 13.81,
+   "lon": -10.83
+  },
+  {
+   "nom": "Manantali",
+   "lat": 13.2,
+   "lon": -10.43
+  },
+  {
+   "nom": "Kita",
+   "lat": 13.04,
+   "lon": -9.49
+  },
+  {
+   "nom": "Siguiri",
+   "lat": 11.42,
+   "lon": -9.17
+  }
+ ]
+}

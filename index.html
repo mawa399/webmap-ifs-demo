@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Webmap de l’Initiative Fleuve Sénégal – démonstration</title>
+<meta name="description" content="Cartographie interactive des actions des membres de l’Initiative Fleuve Sénégal (Ados, AVSF, Geres, Grdr, Gret, Le Partenariat) dans le bassin du fleuve Sénégal, 2021-2026. Démonstration, données fictives.">
+<meta name="keywords" content="Initiative Fleuve Sénégal, IFS, bassin du fleuve Sénégal, webmap, cartographie, projets de développement, Sénégal, Mauritanie, Mali, Guinée">
+<meta name="author" content="Mawa DIAW">
+<link rel="canonical" href="https://mawa399.github.io/webmap-ifs-demo/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Webmap de l’Initiative Fleuve Sénégal (démonstration)">
+<meta property="og:description" content="Où interviennent les membres de l’IFS et leurs partenaires dans le bassin du fleuve Sénégal : carte interactive, filtres croisés et fiches projets.">
+<meta property="og:url" content="https://mawa399.github.io/webmap-ifs-demo/">
+<meta property="og:image" content="https://mawa399.github.io/webmap-ifs-demo/apercu.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Webmap de l’Initiative Fleuve Sénégal (démonstration)","url":"https://mawa399.github.io/webmap-ifs-demo/","applicationCategory":"Cartographie","inLanguage":"fr","spatialCoverage":{"@type":"Place","name":"Bassin du fleuve Sénégal"},"author":{"@type":"Person","name":"Mawa DIAW"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315637A'/%3E%3Cpath d='M5 21c5-6 9 2 14-4s6-5 8-5' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <h1 id="ttl">Webmap de l’Initiative Fleuve Sénégal</h1>
+      <p id="subttl">Actions des membres et de leurs partenaires dans le bassin, 2021-2026</p>
+    </div>
+    <div class="top-actions">
+      <div class="demo" role="note"><i></i>Démonstration · données fictives</div>
+      <button class="hbtn" id="btnAbout" type="button">À propos</button>
+      <button class="hbtn" id="btnQA" type="button">Qualité des données <span class="badge" id="qaBadge">…</span></button>
+      <button class="hbtn" id="btnShare" type="button">Copier le lien de cette vue</button>
+    </div>
+  </header>
+  <div class="embed-bar"><b id="embedTitle">Webmap de l’IFS</b><button class="hbtn" id="btnEmbedFilters" type="button">Filtres</button><a href="./" target="_blank" rel="noopener">Ouvrir la carte complète ↗</a></div>
+  <div class="main">
+    <nav class="tabs" role="tablist" aria-label="Panneaux">
+      <button role="tab" id="tabF" aria-selected="false" type="button">Filtres</button>
+      <button role="tab" id="tabS" aria-selected="true" type="button">Synthèse</button>
+    </nav>
+    <aside id="filters" aria-label="Filtres" data-hide="1">
+      <div class="fl-head"><h2 class="h">Filtrer les projets</h2><span class="count-pill" id="nActive" hidden>0</span></div>
+      <input class="search" id="q" type="search" placeholder="Rechercher un projet, un partenaire…" aria-label="Rechercher">
+      <span class="lbl">Pays</span><div class="chips" id="fPays"></div>
+      <span class="lbl">Région</span><select id="fRegion" aria-label="Région"></select>
+      <span class="lbl">Unité administrative (niveau 2)</span><select id="fUnit" aria-label="Unité administrative"></select>
+      <span class="lbl">Organisation membre</span><div class="checks" id="fOrg"></div>
+      <span class="lbl">Thématique</span><div class="checks" id="fTheme"></div>
+      <span class="lbl">Bailleur</span><select id="fBailleur" aria-label="Bailleur"></select>
+      <span class="lbl">Partenaire</span><select id="fPart" aria-label="Partenaire"></select>
+      <span class="lbl">État du projet</span><div class="chips" id="fEtat"></div>
+      <span class="lbl">Période de mise en œuvre</span>
+      <div class="years">
+        <label>De<select id="y1"></select></label>
+        <label>À<select id="y2"></select></label>
+      </div>
+      <button class="reset" id="reset" type="button" disabled>Réinitialiser les filtres</button>
+    </aside>
+    <div class="mapwrap">
+      <div class="toolbar">
+        <div class="seg" id="segInd" aria-label="Indicateur cartographié"></div>
+        <div class="seg" id="segScale" aria-label="Échelle"></div>
+        <div class="layers-btn">
+          <button class="hbtn" id="btnLayers" type="button" aria-expanded="false" aria-controls="layersPop">Couches et fond de carte</button>
+          <div class="popover" id="layersPop" hidden>
+            <fieldset><legend>Fond de carte</legend>
+              <label><input type="radio" name="bm" value="none" checked> Sobre (sans connexion lourde)</label>
+              <label><input type="radio" name="bm" value="osm"> OpenStreetMap</label>
+              <label><input type="radio" name="bm" value="light"> Plan clair</label>
+              <label><input type="radio" name="bm" value="sat"> Satellite</label>
+            </fieldset>
+            <fieldset><legend>Couches</legend>
+              <label><input type="checkbox" id="lyChoro" checked> Indicateur par unité <small>aplats</small></label>
+              <label><input type="checkbox" id="lyBenef"> Bénéficiaires <small>cercles</small></label>
+              <label><input type="checkbox" id="lyRiver" checked> Fleuve et villes</label>
+              <label><input type="checkbox" id="lyOmvs"> Ouvrages de l’OMVS <small>contexte</small></label>
+              <label><input type="checkbox" id="lyHist"> Historique 2010-2020 <small>Traverses n°50</small></label>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="mapbox">
+        <div id="map" aria-label="Carte du bassin du fleuve Sénégal"></div>
+        <div class="loading" id="loading">Chargement des données…</div>
+        <button class="mc mc-home" id="home" type="button" title="Revenir à la vue d’ensemble" aria-label="Revenir à la vue d’ensemble">⌂</button>
+        <div class="mc mc-legend" id="legend"></div>
+      </div>
+    </div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+</div>
+<div class="overlay" id="ov" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="ovT" id="ovBody"></div></div>
+<div class="toast" id="toast" hidden></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

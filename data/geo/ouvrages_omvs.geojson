@@ -1,0 +1,65 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "nom": "Barrage de Diama",
+    "type": "Barrage anti-sel",
+    "mise_en_service": 1986
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -16.417,
+     16.217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "nom": "Barrage de Manantali",
+    "type": "Barrage hydroélectrique et régulateur",
+    "mise_en_service": 1988
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -10.43,
+     13.196
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "nom": "Centrale de Félou",
+    "type": "Centrale hydroélectrique au fil de l’eau",
+    "mise_en_service": 2013
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -11.33,
+     14.37
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "nom": "Centrale de Gouina",
+    "type": "Centrale hydroélectrique au fil de l’eau",
+    "mise_en_service": 2025
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -11.1,
+     14.0
+    ]
+   }
+  }
+ ]
+}

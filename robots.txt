@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mawa399.github.io/webmap-ifs-demo/sitemap.xml

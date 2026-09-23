@@ -1,0 +1,11 @@
+code;libelle;type
+dev_local;Développement local;sectorielle
+dev_eco;Développement économique;sectorielle
+eau_assainissement;Eau et assainissement;sectorielle
+grn;Gestion des ressources naturelles;sectorielle
+secu_alim;Sécurité alimentaire;sectorielle
+education_formation;Éducation et formation;sectorielle
+pastoralisme;Pastoralisme et élevage;sectorielle
+migration;Migration et développement;sectorielle
+risques_naturels;Risques naturels et inondations;transversale
+cohesion_gouvernance;Cohésion sociale et gouvernance territoriale;transversale
